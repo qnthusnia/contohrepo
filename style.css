@@ -1,0 +1,427 @@
+/* === Base Layout === */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eceff1;
+  height: 100vh;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* === Chatbox === */
+#chatbox {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 400px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fefefe;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  z-index: 998;
+}
+
+#chatbox.hidden {
+  display: none;
+}
+
+/* === Header === */
+.chat-header {
+  background: linear-gradient(135deg,#009d9a);
+  color: white;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+.chat-status {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* === Messages === */
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f5f7fb;
+}
+
+/* Bubble Wrapper */
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Bubbles */
+.message {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4px;
+  max-width: 100%;
+}
+
+/* User Bubble */
+.user {
+  align-self: flex-end;
+}
+.user .message {
+  background: #009d9a;
+  color: white;
+  border-bottom-right-radius: 6px;
+}
+
+/* Bot Bubble */
+.bot {
+  align-self: flex-start;
+}
+.bot .message {
+  background: #e9ecef;
+  color: #333;
+  border-bottom-left-radius: 6px;
+}
+
+/* Timestamp */
+.timestamp {
+  font-size: 11px;
+  color: #777;
+  margin-top: 2px;
+  text-align: right;
+}
+
+/* === Input Area === */
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+/* Tombol upload kiri */
+.file-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f3f5;
+  color: #555;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.file-btn:hover {
+  background: #e0e0e0;
+}
+
+/* Input file hidden */
+#fileInput {
+  display: none;
+}
+
+/* Wrapper textarea di tengah */
+.input-wrapper {
+  flex: 1;
+  background: #f1f3f5;
+  border-radius: 20px;
+  padding: 1px 12px;
+  display: flex;
+  align-items: center;
+}
+.input-wrapper textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  resize: none;
+  font-size: 14px;
+  height: auto;           
+  padding: 0 8px;       
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+/* Tombol kirim */
+.chat-input button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #009d9a;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.chat-input button:hover {
+  background: #0056b3;
+}
+
+/* === Floating Button === */
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #009d9a;
+  color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: transform 0.2s;
+}
+#chat-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* === Typing Indicator === */
+.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #888;
+  border-radius: 50%;
+  animation: blink 1.2s infinite;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* === Animations === */
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.3; }
+  40% { opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Responsive === */
+@media (max-width: 480px) {
+  #chatbox {
+    width: 90%;
+    height: 70%;
+    right: 5%;
+    bottom: 70px;
+  }
+  .input-wrapper textarea {
+    font-size: 12px;
+  }
+  .file-btn {
+    font-size: 16px;
+  }
+}
+
+/* === Images in messages === */
+.message img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* === Styled Tables in Bot Messages === */
+.bot .message table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 13px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.bot .message thead {
+  background: linear-gradient(135deg, #009d9a);
+  color: #fff;
+}
+.bot .message th, .bot .message td {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  word-break: break-word;
+}
+.bot .message tbody tr:nth-child(odd) { background: #f9f9f9; }
+.bot .message tbody tr:nth-child(even) { background: #ffffff; }
+.bot .message tbody tr:hover { background: #e6f0ff; transition: background 0.2s; }
+
+/* Preview file muncul di atas input */
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.file-preview img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.file-preview .file-name {
+  font-size: 12px;
+  padding: 4px 6px;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.file-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #f1f3f5;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.file-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.remove-file {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff4d4d;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Smooth scroll chat */
+.chat-messages {
+  scroll-behavior: smooth;
+}
+
+/* Hover bubble */
+.message:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+}
+
+/* Animasi tombol kirim & upload */
+.chat-input button:active,
+.file-btn:active {
+  transform: scale(0.9);
+}
+
+/* Transition halus di semua elemen interaktif */
+button, .file-btn, .message {
+  transition: all 0.25s ease;
+}
+
+/* File preview hover */
+.file-item {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+.file-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Typing indicator lebih halus */
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+
+/* === Animasi Pesan Baru (bot bubble) === */
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  80% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.message.bot {
+  animation: popIn 0.25s ease;
+}
+
+/* === Placeholder Animasi === */
+@keyframes pulsePlaceholder {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+.input-wrapper textarea::placeholder {
+  animation: pulsePlaceholder 1.5s infinite;
+}
+
+/* === Hover efek preview file === */
+.file-item img {
+  transition: transform 0.2s;
+}
+.file-item:hover img {
+  transform: scale(1.05);
+}
+
+/* === Loading Bar di header === */
+.loading-bar {
+  height: 3px;
+  width: 0;
+  background: #009d9a;
+  animation: loadProgress 3s linear infinite;
+}
+@keyframes loadProgress {
+  0% { width: 0; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
+/* === Robot Goyang saat "thinking" === */
+@keyframes thinking {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+.chat-title.processing {
+  display: inline-block; 
+  animation: thinking 1s infinite;
+}

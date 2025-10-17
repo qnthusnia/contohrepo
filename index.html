@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Chatbox -->
+  <div id="chatbox">
+  <div class="chat-header">
+    <div class="chat-title">🤖 Starcore Chatbot</div>
+    <div class="chat-status">Online</div>
+  </div>
+  
+<!-- Loading bar (default hidden) -->
+<div id="loadingBar" class="loading-bar" style="display:none;"></div>
+  <div id="messages" class="chat-messages"></div>
+
+  <!-- Preview di atas input -->
+  <div id="filePreview" class="file-preview"></div>
+
+  <div class="chat-input">
+    <div class="input-wrapper">
+      <label for="fileInput" class="file-btn">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19"></line>
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+  </svg>
+</label>
+
+      <input id="fileInput" type="file" accept=".pdf,.xlsx,.csv,.jpg,.png" />
+      <textarea id="userInput" placeholder="Tulis pesan..."></textarea>
+    </div>
+    <button id="sendBtn">➤</button>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
